@@ -29,5 +29,6 @@ flutter:
   assets: 
     - assets/lottie/
     - assets/gif/
+    - assets/images/
   uses-material-design: true
 

@@ -32,9 +32,5 @@ abstract class BaseStateController extends GetxController {
     if (loadState.value != LOADING) {
       loadState.value = LOADING;
     }
-    loadData();
   }
-  void loadData();
-
-
 }
