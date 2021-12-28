@@ -27,7 +27,8 @@ class PicRes {
 class ColorRes {
   final MaterialColor primary = MaterialColor(0xF86706FF, const <int, Color>{
     50: const Color(0xF87D2FF8),
-    10: const Color(0xF89C77EA)
+    10: const Color(0xF89C77EA),
+    1: const Color(0xF8D0C5FA)
   });
   final Color white = Colors.white;
   final Color black = Colors.black;

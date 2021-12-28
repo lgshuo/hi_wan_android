@@ -21,9 +21,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
         body:widget.pages[index],
         bottomNavigationBar: BottomNavigationBar(
           items: widget.items,
-          selectedItemColor: R.color().primary,
+          unselectedItemColor: index==widget.pages.length-1?R.color().primary[1]:null,
+          selectedItemColor: index==widget.pages.length-1?R.color().primary:null,
           currentIndex: index,
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           onTap: (index) {
             setState(() {
               this.index = index;
