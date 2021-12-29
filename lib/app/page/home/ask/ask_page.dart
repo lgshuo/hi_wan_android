@@ -23,7 +23,7 @@ class AskPageState extends State<AskPage> with AutomaticKeepAliveClientMixin{
           getController().showLoading();
         },
         itemView: (context,index,data){
-          return CommonListItem(homeListBean: data);
+          return CommonListItem(homeListBean: data,isAsk: true);
         },
     );
   }

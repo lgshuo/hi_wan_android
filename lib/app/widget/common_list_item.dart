@@ -13,9 +13,10 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 class CommonListItem extends StatelessWidget {
   final HomeListBean homeListBean;
   final bool isTop;
+  final bool isAsk;
   final GestureTapCallback? onTap;
 
-  CommonListItem({required this.homeListBean, this.onTap, this.isTop = false});
+  CommonListItem({required this.homeListBean, this.onTap, this.isTop = false,this.isAsk = false});
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +32,24 @@ class CommonListItem extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                      padding: EdgeInsets.all(3.0),
-                      icon: homeListBean.collect!
-                          ? Icon(Icons.favorite, color: Colors.red)
-                          : Icon(Icons.favorite_border),
-                      onPressed: () {
-                        //点击收藏按钮
-                        !homeListBean.collect!
-                            ? Get.find<ArticleCollectionController>()
-                                .collectionArticle(
-                                    homeListBean.id.toString(), homeListBean)
-                            : Get.find<ArticleCollectionController>()
-                                .unCollectionArticle(
-                                    homeListBean.id.toString(), homeListBean);
-                      }),
+                  Visibility(
+                    visible: !isAsk,
+                    child: IconButton(
+                        padding: EdgeInsets.all(3.0),
+                        icon: homeListBean.collect!
+                            ? Icon(Icons.favorite, color: Colors.red)
+                            : Icon(Icons.favorite_border),
+                        onPressed: () {
+                          //点击收藏按钮
+                          !homeListBean.collect!
+                              ? Get.find<ArticleCollectionController>()
+                                  .collectionArticle(
+                                      homeListBean.id.toString(), homeListBean)
+                              : Get.find<ArticleCollectionController>()
+                                  .unCollectionArticle(
+                                      homeListBean.id.toString(), homeListBean);
+                        }),
+                  ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
