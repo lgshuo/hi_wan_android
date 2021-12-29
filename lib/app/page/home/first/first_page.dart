@@ -4,6 +4,7 @@ import 'package:flutter_base_master/app/data/home_list_bean.dart';
 import 'package:flutter_base_master/app/res/R.dart';
 import 'package:flutter_base_master/app/widget/common_list_item.dart';
 import 'package:flutter_base_master/base/widget/list_view/refresh_list_view_page.dart';
+import 'package:flutter_base_master/base/widget/refresh_list_view_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -11,39 +12,41 @@ import 'package:get/get_instance/src/extension_instance.dart';
 
 import 'first_page_controller.dart';
 
-class FirstPage extends BaseRefreshListViewPage<FirstPageController>{
-
+class FirstPage extends StatefulWidget {
   @override
-  Widget itemView(BuildContext context, int index) {
-    return Text("");
+  State<StatefulWidget> createState() {
+    return FirstPageState();
+  }
+}
+
+class FirstPageState extends State<FirstPage> with AutomaticKeepAliveClientMixin{
+  @override
+  Widget build(BuildContext context) {
+    return RefreshListViewWidget<FirstPageController, HomeListBean>(
+        init: Get.put<FirstPageController>(FirstPageController()),
+        initState: (_) {
+          getController().initData();
+        },
+        itemView: null,
+        refreshChild:(){
+         return CustomScrollView(
+            slivers: [
+              _buildBannerUI(),
+              _buildListUI(context, getController().topArtList, true),
+              _buildListUI(context, getController().datas, false),
+
+            ],
+          );
+        });
   }
 
-  @override
-  void onItemClick(BuildContext context, int index) {
-    // TODO: implement onItemClick
+  FirstPageController getController() {
+    return Get.find<FirstPageController>();
   }
-
-  @override
-  FirstPageController putController() {
-  return Get.put<FirstPageController>(FirstPageController());
-  }
-
-  @override
-  Widget listBuilder(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        _buildBannerUI(),
-        _buildListUI(context,getController().topArtList,true),
-        _buildListUI(context,getController().datas,false),
-
-      ],
-    );
-  }
-
 
   ///首页轮播图
   _buildBannerUI() {
-   var bannerList = getController().bannerList;
+    var bannerList = getController().bannerList;
     return SliverToBoxAdapter(
       child: Container(
         height: 370.h,
@@ -61,13 +64,15 @@ class FirstPage extends BaseRefreshListViewPage<FirstPageController>{
           autoplay: true,
           itemCount: bannerList.length,
           pagination: new SwiperPagination(
-              builder: DotSwiperPaginationBuilder(activeColor: R.color().primary)),
+              builder: DotSwiperPaginationBuilder(activeColor: R
+                  .color()
+                  .primary)),
         ),
       ),
     );
   }
 
-  _buildListUI(BuildContext context,List<HomeListBean> items,bool istop){
+  _buildListUI(BuildContext context, List<HomeListBean> items, bool istop) {
     return SliverList(
       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
         return CommonListItem(
@@ -79,8 +84,6 @@ class FirstPage extends BaseRefreshListViewPage<FirstPageController>{
   }
 
   @override
-  void onInitState() {
-    getController().initData();
-  }
+  bool get wantKeepAlive => true;
 }
 

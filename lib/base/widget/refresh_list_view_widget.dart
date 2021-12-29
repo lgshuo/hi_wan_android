@@ -13,7 +13,7 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
   final String? tag;
   final T? init;
   final void Function(GetXState<T> state)? initState;
-  Widget? refreshChild;
+  Widget? Function()? refreshChild;
 
   Widget Function(BuildContext context, int index, D data)? itemView;
 
@@ -50,7 +50,7 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
                       itemBuilder: (context, index) => itemView!(context, index, controller.datas[index]),
                       itemCount: controller.datas.length,
                     )
-                  : refreshChild!);
+                  : refreshChild!());
         });
   }
 }
