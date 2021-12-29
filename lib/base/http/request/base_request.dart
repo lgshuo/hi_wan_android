@@ -20,7 +20,7 @@ class Request {
 
   static void get<T>(
     String url,
-    Map<String, String> params, {
+    Map<String, String>? params, {
     Success<T>? success,
     Fail? fail,
   }) {
@@ -34,7 +34,7 @@ class Request {
   /// [fail] 请求失败回调
   static void post<T>(
     String url,
-    Map<String, String> params, {
+    Map<String, String>? params, {
     Success<T>? success,
     Fail? fail,
   }) {
@@ -65,11 +65,11 @@ class Request {
         var result = response.data;
         var resultModel = Result.fromJson(result);
         debugPrint("request success =>$resultModel");
-        if (resultModel.code == 1) {
+        if (resultModel.errorCode == 0) {
           success(resultModel.data);
         } else {
           ///其他状态，弹出错误提示信息
-          ToastUtils.showWarn(resultModel.message);
+          ToastUtils.showWarn(resultModel.errorMsg);
         }
       }
     } on DioError catch (e) {

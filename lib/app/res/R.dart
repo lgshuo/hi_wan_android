@@ -30,6 +30,9 @@ class ColorRes {
     10: const Color(0xF89C77EA),
     1: const Color(0xF8D0C5FA)
   });
+  final MaterialColor headline = MaterialColor(0xff000000, const <int, Color>{
+
+  });
   final Color white = Colors.white;
   final Color black = Colors.black;
 }

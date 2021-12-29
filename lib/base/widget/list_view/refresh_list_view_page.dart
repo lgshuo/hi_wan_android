@@ -22,7 +22,7 @@ abstract class BaseRefreshListViewPage<T extends BaseRefreshListViewController>
       onLoading: () {
         controller.loadMore();
       },
-      child: listBuilder() == null
+      child: listBuilder(context) == null
           ? ListView.builder(
               itemBuilder: (context, index) => GestureDetector(
                 child: itemView(context, index),
@@ -32,13 +32,11 @@ abstract class BaseRefreshListViewPage<T extends BaseRefreshListViewController>
               ),
               itemCount: controller.datas.length,
             )
-          : listBuilder(),
+          : listBuilder(context),
     );
   }
 
-  Widget? listBuilder() {
-    return null;
-  }
+  Widget listBuilder(BuildContext context);
   Widget itemView(BuildContext context, int index);
 
   void onItemClick(BuildContext context, int index);
