@@ -6,19 +6,25 @@ import 'package:flutter_base_master/base/utils/toast_utils.dart';
 
 class ArticleCollectionController extends BaseStateController{
   ///收藏文章
-  void collectionArticle(String id,HomeListBean articleItem) {
+  void collectionArticle(String id,{HomeListBean? articleItem,Function()? change}) {
     Request.post<dynamic>(RequestApi.collect(id), null, success: (data) {
-      articleItem.setCollection(true);
-      ToastUtils.show("收藏成功");
+        articleItem?.setCollection(true);
+        if (change!=null) {
+          change;
+        }
+        ToastUtils.show("收藏成功");
     },fail: (errcode,errmsg){
       ToastUtils.show(errmsg);
     });
   }
 
   ///取消收藏文章
-  void unCollectionArticle(String id,HomeListBean articleItem) {
+  void unCollectionArticle(String id,{HomeListBean? articleItem,Function()? change}) {
     Request.post<dynamic>(RequestApi.uncollect(id), null, success: (data) {
-      articleItem.setCollection(false);
+      articleItem?.setCollection(false);
+      if (change!=null) {
+        change;
+      }
       ToastUtils.show("取消成功");
     },fail: (errcode,errmsg){
       ToastUtils.show(errmsg);

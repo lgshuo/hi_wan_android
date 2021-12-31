@@ -11,10 +11,14 @@ abstract class BaseStatelessView<T extends BaseStateController>
     extends StatelessWidget {
   final String? tag = null;
 
-  Widget successWidget(T controller, BuildContext context);
+  Widget? successWidget(T controller, BuildContext context);
 
   @override
   Widget build(BuildContext context) {
+    return getWidget(context);
+  }
+
+  Widget getWidget(BuildContext context){
     return GetX<T>(
       autoRemove: false,
       init: putController(),
@@ -28,6 +32,7 @@ abstract class BaseStatelessView<T extends BaseStateController>
         );
       },
     );
+
   }
 
   T putController();
@@ -41,7 +46,7 @@ abstract class BaseStatelessView<T extends BaseStateController>
     return Get.find<T>(tag: tag);
   }
 
-  Widget _bodyWidget(BuildContext context) {
+  Widget? _bodyWidget(BuildContext context) {
     var controller = getController();
     switch (controller.loadState.value) {
       case BaseStateController.LOADING:

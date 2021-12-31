@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base_master/app/data/constant.dart';
 import 'package:flutter_base_master/app/data/home_list_bean.dart';
 import 'package:flutter_base_master/app/page/home/first/article_collection_controller.dart';
 import 'package:flutter_base_master/app/res/R.dart';
@@ -44,10 +45,10 @@ class CommonListItem extends StatelessWidget {
                           !homeListBean.collect!
                               ? Get.find<ArticleCollectionController>()
                                   .collectionArticle(
-                                      homeListBean.id.toString(), homeListBean)
+                                      homeListBean.id.toString(), articleItem: homeListBean)
                               : Get.find<ArticleCollectionController>()
                                   .unCollectionArticle(
-                                      homeListBean.id.toString(), homeListBean);
+                                      homeListBean.id.toString(), articleItem: homeListBean);
                         }),
                   ),
                   Expanded(
@@ -116,7 +117,12 @@ class CommonListItem extends StatelessWidget {
               ),
               onTap: onTap ??
                   () {
-                    Get.toNamed(Routes.WEB);
+                    Get.toNamed(Routes.WEB,arguments: {
+                      Constant.ARTICLE_ISCOLLECT:homeListBean.collect,
+                      Constant.ART_ID:homeListBean.id.toString(),
+                      Constant.ARTICLE_TITLE:homeListBean.title,
+                      Constant.ARTICLE_URL:homeListBean.link
+                    });
                   })),
     );
   }
