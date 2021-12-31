@@ -36,10 +36,10 @@ class SPUtils {
     }
   }
 
-  remove(String key) {
+ void remove(String key) {
     prefs?.remove(key);
   }
-  put(String key,Object value) {
+ void put(String key,Object value) {
     if (value is int) {
       prefs?.setInt(key, value);
     } else if (value is String) {

@@ -11,7 +11,7 @@ abstract class BaseStatelessView<T extends BaseStateController>
     extends StatelessWidget {
   final String? tag = null;
 
-  Widget? successWidget(T controller, BuildContext context);
+  Widget successWidget(T controller, BuildContext context);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ abstract class BaseStatelessView<T extends BaseStateController>
     return Text("未知状态");
   }
 
-  AppBar? getAppBar(){
+  PreferredSizeWidget? getAppBar(){
     return null;
   }
 }

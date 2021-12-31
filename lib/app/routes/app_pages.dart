@@ -1,5 +1,5 @@
-import 'package:flutter_base_master/app/page/home/search/search_page.dart';
 import 'package:flutter_base_master/app/page/main/main_page.dart';
+import 'package:flutter_base_master/app/page/search/search_page.dart';
 import 'package:flutter_base_master/app/page/splash/splash_page.dart';
 import 'package:flutter_base_master/app/page/web/web_page.dart';
 import 'package:get/get.dart';
