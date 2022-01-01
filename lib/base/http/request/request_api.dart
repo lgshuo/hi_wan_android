@@ -7,4 +7,6 @@ abstract class RequestApi {
   static String uncollect(String id) =>"/lg/uncollect_originId/$id/json";
   static String getsquareList(int pageIndex) =>"/user_article/list/$pageIndex/json";
   static String getaskList(int pageIndex) =>"/wenda/list/$pageIndex/json";
+  static String getSearchList(int pageIndex) =>"/article/query/$pageIndex/json";
+  static const String hotkey ="/hotkey/json";
 }

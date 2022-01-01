@@ -6,6 +6,8 @@ class SPUtils {
 
   static SPUtils? _instance;
 
+ static const String SEARCHKEY = "SEARCHKEY";
+
   SPUtils._() {
     init();
   }
@@ -58,5 +60,35 @@ class SPUtils {
       return result as T;
     }
     return null;
+  }
+
+  /// 搜索历史记录
+  /// [word] 搜索记录
+  void saveSearchHistory(String word) {
+    var history = getSearchHistory();
+    if(history.contains(word)){
+      return;
+    }
+    history.insert(0 , word);
+    put(SEARCHKEY, history);
+  }
+
+  ///清空搜索历史
+   void deleteSearchHistory(){
+    remove(SEARCHKEY);
+  }
+
+  ///获取搜索历史记录
+  List<String> getSearchHistory() {
+    try {
+      var json = get<List<String>>(SEARCHKEY);
+      if (json == null) {
+        return [];
+      } else {
+        return json;
+      }
+    } catch (e) {
+      return [];
+    }
   }
 }
