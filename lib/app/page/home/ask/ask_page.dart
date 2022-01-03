@@ -19,17 +19,18 @@ class AskPageState extends State<AskPage> with AutomaticKeepAliveClientMixin{
     return RefreshListViewWidget<AskPageController,HomeListBean>(
         init:Get.put<AskPageController>(AskPageController()),
         initState: (_){
-          getController().loadData();
-          getController().showLoading();
+          Get.find<AskPageController>().loadData();
+          Get.find<AskPageController>().showLoading();
         },
+      getController: (){
+          return Get.find<AskPageController>();
+      },
         itemView: (context,index,data){
           return CommonListItem(homeListBean: data,isAsk: true);
         },
     );
   }
-  AskPageController getController(){
-    return Get.find<AskPageController>();
-  }
+
   @override
   bool get wantKeepAlive => true;
 }

@@ -15,14 +15,15 @@ class CommonListItem extends StatelessWidget {
   final HomeListBean homeListBean;
   final bool isTop;
   final bool isAsk;
+  final Color? bgColor;
   final GestureTapCallback? onTap;
 
-  CommonListItem({required this.homeListBean, this.onTap, this.isTop = false,this.isAsk = false});
+  CommonListItem({required this.homeListBean, this.onTap, this.isTop = false,this.isAsk = false,this.bgColor=null});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: R.color().primary,
+      color:bgColor?? R.color().primary,
       child: Container(
           margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
           decoration: BoxDecoration(

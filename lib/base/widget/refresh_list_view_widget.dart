@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_master/base/state/base_state_get_view.dart';
 import 'package:flutter_base_master/base/widget/list_view/list_view_footer.dart';
 import 'package:flutter_base_master/base/widget/list_view/list_view_head.dart';
 import 'package:flutter_base_master/base/widget/state_get_widget.dart';
@@ -14,6 +13,7 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
   final T? init;
   final void Function(GetXState<T> state)? initState;
   Widget? Function()? refreshChild;
+  T Function() getController;
 
   Widget Function(BuildContext context, int index, D data)? itemView;
 
@@ -22,6 +22,7 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
       {this.tag,
         required this.init,
         required this.initState,
+        required this.getController,
       this.refreshChild,
       required this.itemView,
       });
@@ -32,23 +33,23 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
         tag: tag,
         initState: initState,
         init: init,
-        successWidget: (controller, context) {
+        successWidget: (_, context) {
           return SmartRefresher(
-              controller: controller.refreshController,
+              controller: getController().refreshController,
               enablePullUp: true,
               physics: BouncingScrollPhysics(),
               header: ListViewHead(),
               footer: ListViewFooter(),
               onRefresh: () {
-                controller.refresh();
+                getController().refresh();
               },
               onLoading: () {
-                controller.loadMore();
+                getController().loadMore();
               },
               child: refreshChild == null
                   ? ListView.builder(
-                      itemBuilder: (context, index) => itemView!(context, index, controller.datas[index]),
-                      itemCount: controller.datas.length,
+                      itemBuilder: (context, index) => itemView!(context, index, getController().datas[index]),
+                      itemCount: getController().datas.length,
                     )
                   : refreshChild!());
         });

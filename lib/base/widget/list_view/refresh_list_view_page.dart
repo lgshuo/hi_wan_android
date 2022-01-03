@@ -36,7 +36,9 @@ abstract class BaseRefreshListViewPage<T extends BaseRefreshListViewController>
     );
   }
 
-  Widget listBuilder(BuildContext context);
+  Widget? listBuilder(BuildContext context){
+    return null;
+  }
   Widget itemView(BuildContext context, int index);
 
   void onItemClick(BuildContext context, int index);

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_master/app/data/home_list_bean.dart';
 import 'package:flutter_base_master/app/page/search/search_controller.dart';
+import 'package:flutter_base_master/app/res/R.dart';
 import 'package:flutter_base_master/app/widget/common_list_item.dart';
 import 'package:flutter_base_master/base/widget/refresh_list_view_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,8 +19,11 @@ class SearchResultWidget extends StatelessWidget {
         child: RefreshListViewWidget<SearchController, HomeListBean>(
           init: null,
           initState: null,
+          getController:(){
+            return Get.find<SearchController>();
+          } ,
           itemView: (context, index, data) {
-            return CommonListItem(homeListBean: data);
+            return CommonListItem(homeListBean: data,bgColor: ColorRes.colorShadow);
           },
         ),
       ),

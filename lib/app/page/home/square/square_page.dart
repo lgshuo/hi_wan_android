@@ -21,6 +21,9 @@ class SquarePageState extends State<SquarePage> with AutomaticKeepAliveClientMix
           getController().loadData();
           getController().showLoading();
         },
+      getController: (){
+        return Get.find<SquarePageController>();
+      },
         itemView: (context,index,data){
           return CommonListItem(homeListBean: data);
         },

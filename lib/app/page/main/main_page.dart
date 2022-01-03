@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_master/app/page/home/first/first_page.dart';
 import 'package:flutter_base_master/app/page/home/home_page.dart';
+import 'package:flutter_base_master/app/page/project/project_page.dart';
 import 'package:flutter_base_master/app/res/R.dart';
 import 'package:flutter_base_master/base/widget/bottom_navigation.dart';
 
@@ -21,7 +22,7 @@ class MainPage extends StatelessWidget {
 
   var pages = [
     HomePage(),
-    EmptyPage(),
+    ProjectPage(),
     EmptyPage(),
     EmptyPage(),
     EmptyPage(),

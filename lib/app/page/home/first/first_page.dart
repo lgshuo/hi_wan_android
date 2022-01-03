@@ -27,6 +27,9 @@ class FirstPageState extends State<FirstPage> with AutomaticKeepAliveClientMixin
         initState: (_) {
           getController().initData();
         },
+        getController: (){
+          return Get.find<FirstPageController>();
+        },
         itemView: null,
         refreshChild:(){
          return CustomScrollView(
