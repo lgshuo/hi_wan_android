@@ -9,6 +9,9 @@ abstract class RequestApi {
   static String getaskList(int pageIndex) =>"/wenda/list/$pageIndex/json";
   static String getSearchList(int pageIndex) =>"/article/query/$pageIndex/json";
   static String getProjectList(int pageIndex) =>"/project/list/$pageIndex/json";
+  static String getWeChatList(int id,int pageIndex) =>"/wxarticle/list/$id/$pageIndex/json";
   static const String hotkey ="/hotkey/json";
   static const String project ="/project/tree/json";
+  static const String weChat ="/wxarticle/chapters/json";
+  static const String tree ="/tree/json";
 }

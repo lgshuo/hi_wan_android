@@ -33,6 +33,7 @@ class RefreshListViewWidget<T extends BaseRefreshListViewController, D>
         tag: tag,
         initState: initState,
         init: init,
+        getController: getController,
         successWidget: (_, context) {
           return SmartRefresher(
               controller: getController().refreshController,

@@ -7,6 +7,7 @@ import 'package:flutter_base_master/base/state/base_state_controller.dart';
 import 'package:flutter_base_master/base/state/base_state_get_view.dart';
 import 'package:flutter_base_master/base/state/page/error_page.dart';
 import 'package:flutter_base_master/base/state/page/loading_page.dart';
+import 'package:flutter_base_master/base/utils/third_app_utils.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -28,14 +29,15 @@ class WebPage extends BaseStatelessView<WebPageController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_controller != null) {
-          Get.back(result: getController().isCollection.value);
+        if (_controller == null) {
+         return false;
         }
         _controller?.canGoBack().then((value) {
           if (value) {
             _controller?.goBack();
           } else {
             Get.back(result: getController().isCollection.value);
+            return false;
           }
         });
         return true;
@@ -114,10 +116,14 @@ class WebPage extends BaseStatelessView<WebPageController> {
         }
       },
       navigationDelegate: (NavigationRequest request) {
-        if (!request.url.contains("http")) {
+        ///TODO isForMainFrame为false,页面不跳转.导致网页内很多链接点击没效果
+        debugPrint('导航$request');
+        if (!request.url.startsWith('http')) {
+          ThirdAppUtils.openAppByUrl(request.url);
           return NavigationDecision.prevent;
+        } else {
+          return NavigationDecision.navigate;
         }
-        return NavigationDecision.navigate;
       },
       onWebResourceError: (error) {},
     );

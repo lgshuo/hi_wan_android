@@ -12,10 +12,11 @@ class StateGetWidget<T extends BaseStateController> extends StatelessWidget {
   final String? tag;
   final T? init;
   final void Function(GetXState<T> state)? initState;
+  T Function() getController;
   final Widget Function(T controller, BuildContext context) successWidget;
 
   StateGetWidget(
-      {this.tag, this.initState, this.init, required this.successWidget});
+      {this.tag, this.initState, this.init,required this.getController, required this.successWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +38,5 @@ class StateGetWidget<T extends BaseStateController> extends StatelessWidget {
         return Text("未知状态");
       },
     );
-  }
-
-  T getController() {
-    return Get.find<T>(tag: tag);
   }
 }
