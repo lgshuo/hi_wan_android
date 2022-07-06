@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_master/app/page/home/first/first_page.dart';
 import 'package:flutter_base_master/app/page/home/home_page.dart';
+import 'package:flutter_base_master/app/page/person/person_page.dart';
 import 'package:flutter_base_master/app/page/project/project_page.dart';
 import 'package:flutter_base_master/app/page/system/system_page.dart';
 import 'package:flutter_base_master/app/page/wechat/we_chat_page.dart';
@@ -27,7 +28,7 @@ class MainPage extends StatelessWidget {
     ProjectPage(),
     SystemPage(),
     WeChatPage(),
-    EmptyPage(),
+    PersonPage(),
   ];
 
   @override
